@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+# ############################################################################
+# Makes
+#   web/sites/${site}/settings.local.php, and
+#   web/sites/${site}/settings.php
+# read-only.
+# ############################################################################
+
+set -e
+
+SITE=${1:-default};
+
+SETTINGS_PHP="web/sites/${SITE}/settings.php";
+SETTINGS_LOCAL_PHP="web/sites/${SITE}/settings.local.php";
+
+for F in $SETTINGS_PHP $SETTINGS_LOCAL_PHP; do
+  if [ -e "${F}" ]; then
+    chmod u+w "${F}";
+  fi
+done

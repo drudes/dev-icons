@@ -1,0 +1,139 @@
+{
+    "name": "drudes/dev-icons",
+    "description": "Local development environment for icon modules",
+    "type": "project",
+    "license": "GPL-2.0-or-later",
+    "homepage": "https://github.com/drudes/dev1",
+    "support": {
+        "issues": "https://github.com/drudes/dev1/issues"
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        },
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        },
+        {
+          "type": "path",
+          "url": "../repos/*",
+          "options": {
+            "symlink": false
+          }
+        }
+    ],
+    "require": {
+        "drupal/core-composer-scaffold": "^9.2",
+        "drupal/core-project-message": "^9.2",
+        "drupal/devel": "^4.1",
+        "drupal/icon_bundle_api": "*",
+        "drupal/icon_bundle_fontawesome": "*"
+    },
+    "require-dev": {
+        "drupal/console": "^1.9",
+        "drupal/core-dev": "^9.2",
+        "drush/drush": "^10.6",
+        "fenetikm/autoload-drupal": "dev-master",
+        "php-mock/php-mock": "^2.3",
+        "phpspec/prophecy-phpunit": "^2",
+        "phptailors/phpunit-inheritance": "dev-master",
+        "phpunit/phpunit": "^9.4",
+        "psalm/plugin-phpunit": "^0.16",
+        "vimeo/psalm": "^4.22"
+    },
+    "conflict": {
+        "drupal/drupal": "*"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "composer/installers": true,
+            "drupal/core-composer-scaffold": true,
+            "drupal/core-project-message": true,
+            "drupal/console-extend-plugin": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "fenetikm/autoload-drupal": true,
+            "oomphinc/composer-installers-extender": true
+        }
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "@composer drupal:scaffold"
+        ],
+        "post-update-cmd": [
+            "@composer drupal:scaffold"
+        ]
+    },
+    "extra": {
+        "autoload-drupal": {
+          "modules": [
+              "web/core/modules/"
+          ]
+        },
+        "drupal-scaffold": {
+            "locations": {
+                "web-root": "web/"
+            }
+        },
+        "installer-types": [
+            "bower-asset",
+            "npm-asset"
+        ],
+        "installer-paths": {
+            "web/core": [
+                "type:drupal-core"
+            ],
+            "web/libraries/{$name}": [
+                "type:drupal-library",
+                "type:bower-asset",
+                "type:npm-asset"
+            ],
+            "web/modules/contrib/{$name}": [
+                "type:drupal-module"
+            ],
+            "web/profiles/contrib/{$name}": [
+                "type:drupal-profile"
+            ],
+            "web/themes/contrib/{$name}": [
+                "type:drupal-theme"
+            ],
+            "drush/Commands/contrib/{$name}": [
+                "type:drupal-drush"
+            ],
+            "web/modules/custom/{$name}": [
+                "type:drupal-custom-module"
+            ],
+            "web/profiles/custom/{$name}": [
+                "type:drupal-custom-profile"
+            ],
+            "web/themes/custom/{$name}": [
+                "type:drupal-custom-theme"
+            ]
+        },
+        "drupal-core-project-message": {
+            "include-keys": [
+                "homepage",
+                "support"
+            ],
+            "post-create-project-cmd-message": [
+                "<bg=blue;fg=white>                                                         </>",
+                "<bg=blue;fg=white>  Congratulations, you’ve installed the Drupal codebase  </>",
+                "<bg=blue;fg=white>  from the drupal/recommended-project template!          </>",
+                "<bg=blue;fg=white>                                                         </>",
+                "",
+                "<bg=yellow;fg=black>Next steps</>:",
+                "  * Install the site: https://www.drupal.org/docs/8/install",
+                "  * Read the user guide: https://www.drupal.org/docs/user_guide/en/index.html",
+                "  * Get support: https://www.drupal.org/support",
+                "  * Get involved with the Drupal community:",
+                "      https://www.drupal.org/getting-involved",
+                "  * Remove the plugin that prints this message:",
+                "      composer remove drupal/core-project-message"
+            ]
+        }
+    }
+}

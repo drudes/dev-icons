@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -e
+
+if ls -d web/*/custom >/dev/null 2>&1; then
+  mkdir -p 'tmp/';
+
+  SUFFIX=`date '+%Y%m%d%H%M%S'`;
+
+  tar -czf "tmp/backup-custom-${SUFFIX}.tar.gz" web/*/custom;
+fi

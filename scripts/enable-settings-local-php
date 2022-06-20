@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+# ############################################################################
+# Includes local config
+#   web/sites/${site}/settings.local.php
+# into
+#   web/sites/${site}/settings.php .
+#
+# This is performed by uncommenting an existing code in settings.php provided
+# by Drupal 9.
+# ############################################################################
+
+set -e
+
+SITE=${1:-default};
+
+SETTINGS_PHP="web/sites/${SITE}/settings.php";
+
+if [ ! -f "${SETTINGS_PHP}" ]; then
+  echo "error: file '${SETTINGS_PHP}' does not exist" >&2;
+  echo "error: did you run ddev start?" >&2;
+  exit 1;
+fi
+
+SETTINGS_LOCAL_SRC="web/sites/example.settings.local.php";
+SETTINGS_LOCAL_TGT="web/sites/${SITE}/settings.local.php";
+
+if [ ! -e "${SETTINGS_LOCAL_TGT}" ]; then
+  if [ ! -f "${SETTINGS_LOCAL_SRC}" ]; then
+    echo "error: file '${SETTINGS_LOCAL_SRC}' does not exist" >&2;
+    echo "error: did you forget to run 'composer up' or 'composer install'?" >&2;
+    exit 1;
+  fi
+  cp "${SETTINGS_LOCAL_SRC}" "${SETTINGS_LOCAL_TGT}";
+fi
+
+read -r P1 <<'!'
+N;N;/^\s*#\+\s*if\s*(file_exists($app_root\s*\.\s*'\/'\s*\.\s*$site_path\s*\.\s*'\/settings\.local\.php'))\s*{\s*\n\s*#\+\s*include\s*$app_root\s*\.\s*'\/'\s*\.\s*$site_path\s*\.\s*'\/settings\.local\.php';\s*\n\s*#\+\s*}\s*$/s/\(^\|\n\)\s*# \?/\1/g;
+!
+
+sed -e "$P1" -i "${SETTINGS_PHP}";
+

@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+# ############################################################################
+# Reverts the job done by enable-settings-local-php
+# ############################################################################
+
+set -e
+
+SITE=${1:-default};
+
+SETTINGS_PHP="web/sites/${SITE}/settings.php";
+
+if [ ! -f "${SETTINGS_PHP}" ]; then
+  echo "error: file '${SETTINGS_PHP}' does not exist" >&2;
+  echo "error: did you run ddev start?" >&2;
+  exit 1;
+fi
+
+read -r P1 <<'!'
+N;N;/^\s*if\s*(file_exists($app_root\s*\.\s*'\/'\s*\.\s*$site_path\s*\.\s*'\/settings\.local\.php'))\s*{\s*\n\s*include\s*$app_root\s*\.\s*'\/'\s*\.\s*$site_path\s*\.\s*'\/settings\.local\.php';\s*\n\s*}\s*$/s/\(^\|\n\)/\1# /g;
+!
+
+sed -e "$P1" -i "${SETTINGS_PHP}";
+

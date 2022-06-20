@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+for SRCDIR in web/*/{contrib,custom}/*; do
+  if [ -d "$SRCDIR" ]; then
+    DSTDIR=`echo "${SRCDIR}" | sed -e 's|^\(./\)\?web/\w\+/\w\+/|../repos/|'`;
+    if [ -d "${DSTDIR}" ]; then
+      rsync --exclude-from="${DSTDIR}/.gitignore" --exclude-from=.rsyncignore -av --delete "${SRCDIR}/" "${DSTDIR}/"
+    fi;
+  fi;
+done

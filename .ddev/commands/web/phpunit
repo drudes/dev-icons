@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+set -e
+
+if php -m | grep -qs 'xdebug'; then
+  xdebug_disabled=false
+else
+  xdebug_disabled=true
+  php_ini_dir=`LANG=C php -i | grep -oP 'Configuration File.* Path => \K.+'`;
+  if [ -z "${php_ini_dir}" ]; then
+    echo "warning: could not determine PHP configuration path" >&2;
+  else
+    xdebug_php_ini="${php_ini_dir}/conf.d/20-xdebug.ini";
+  fi
+fi
+
+if $xdebug_disabled && [ ! -z "${xdebug_php_ini}" ] && [ ! -e "${xdebug_php_ini}" ]; then
+  echo "zend_extension=xdebug.so" > "${xdebug_php_ini}";
+  trap "rm -f '${xdebug_php_ini}'" EXIT
+fi
+
+XDEBUG_MODE=coverage vendor/bin/phpunit $*

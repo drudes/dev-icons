@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+set -e
+
+ddev start
+ddev composer up
+ddev exec scripts/chmod-settings-writable
+ddev exec scripts/enable-settings-local-php
+ddev exec scripts/enable-development-services
+ddev exec scripts/chmod-settings-unwritable
+ddev drush si --site-name="'Icon Bundle API development'" --account-pass=admin --yes
+mkdir -p web/sites/simpletest/browser_output

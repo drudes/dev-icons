@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -e
+
+scripts/backup-contrib;
+scripts/backup-custom;
+
+ddev stop -RO;
+docker container prune -f;
+rm -rf vendor composer.lock web build;
+rm -rf .psalm/cache build .php-cs-fixer.cache .phpunit.result.cache

@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+# ############################################################################
+# Includes local config
+#   web/sites/${site}/settings.local.php
+# into
+#   web/sites/${site}/settings.php .
+#
+# This is performed by uncommenting an existing code in settings.php provided
+# by Drupal 9.
+# ############################################################################
+
+set -e
+
+SITE=${1:-default};
+
+DEVELOPMENT_SERVICES_YML="web/sites/development.services.yml";
+
+if [ ! -f "${DEVELOPMENT_SERVICES_YML}" ]; then
+  echo "error: file '${DEVELOPMENT_SERVICES_YML}' does not exist" >&2;
+  echo "error: did you forget to run 'composer up' or 'composer install'?" >&2;
+  exit 1;
+fi
+
+read -r P1 <<'!'
+N;s/^\(parameters:\s*\n\(\s\+\)http\.response\.debug_cacheability_headers:\s*\w\+\s*\)$/\1\n\2twig.config:\n\2\2debug: true/
+!
+
+
+sed -e "$P1" -i "${DEVELOPMENT_SERVICES_YML}";
