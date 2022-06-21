@@ -57,6 +57,7 @@ This will install Drupal website under ``web/`` directory (note that the
 The modules being developed get installed automatically under
 ``web/modules/contrib``. Source code shall be modified there.
 
+### Sending changes back to ``repos``
 
 Once, a piece of the work is done, the changes then can be pushed back to
 ``../repos/*`` with the script:
@@ -70,4 +71,16 @@ what needs to be committed to git, for example:
 
 ```
 (cd ../repos/icon_bundle_api && git status)
+```
+
+### Running tests
+
+```
+ddev phpunit
+```
+
+### Running psalm for static analysis
+
+```
+ddev exec vendor/bin/psalm
 ```

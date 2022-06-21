@@ -16,11 +16,9 @@
   findUnusedPsalmSuppress="true"
 >
     <projectFiles>
-        <directory name="web/themes/contrib/drumeilook/src"/>
         <directory name="web/modules/contrib/icon_bundle_api/src"/>
         <directory name="web/modules/contrib/icon_field/src"/>
         <directory name="web/modules/contrib/icon_bundle_fontawesome/src"/>
-        <file name="web/themes/contrib/drumeilook/drumeilook.theme"/>
         <file name="web/modules/contrib/icon_bundle_api/icon_bundle_api.module"/>
         <file name="web/modules/contrib/icon_field/icon_field.module"/>
         <file name="web/modules/contrib/icon_bundle_fontawesome/icon_bundle_fontawesome.module"/>

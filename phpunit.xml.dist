@@ -39,7 +39,7 @@
      SIMPLETEST_BASE_URL is an internal DDEV URL, you can set this to the
      external DDev URL so you can follow the links directly.
     -->
-    <env name="BROWSERTEST_OUTPUT_BASE_URL" value="https://drumeil-master.ddev.site"/>
+    <env name="BROWSERTEST_OUTPUT_BASE_URL" value="https://dev-icons.ddev.site"/>
     <!-- To disable deprecation testing completely uncomment the next line. -->
     <!-- <env name="SYMFONY_DEPRECATIONS_HELPER" value="disabled"/> -->
     <!-- Example for changing the driver class for mink tests MINK_DRIVER_CLASS value: 'Drupal\FunctionalJavascriptTests\DrupalSelenium2Driver' -->
@@ -51,26 +51,15 @@
   </php>
 
   <testsuites>
-    <testsuite name="unit">
-      <file>./web/core/tests/TestSuites/UnitTestSuite.php</file>
-    </testsuite>
-    <testsuite name="kernel">
-      <file>./web/core/tests/TestSuites/KernelTestSuite.php</file>
-    </testsuite>
     <testsuite name="functional">
-      <file>./web/core/tests/TestSuites/FunctionalTestSuite.php</file>
+      <directory suffix="Test.php">web/modules/contrib/icon_bundle_api/tests/src/Functional</directory>
+      <!--<directory suffix="Test.php">web/modules/contrib/icon_bundle_fontawesome/tests/src/Functional</directory>-->
+      <!--<directory suffix="Test.php">web/modules/contrib/icon_field/tests/src/Functional</directory>-->
     </testsuite>
-    <testsuite name="functional-javascript">
-      <file>./web/core/tests/TestSuites/FunctionalJavascriptTestSuite.php</file>
-    </testsuite>
-    <testsuite name="build">
-      <file>./web/core/tests/TestSuites/BuildTestSuite.php</file>
-    </testsuite>
-    <testsuite name="drumeilook-functional">
-      <directory suffix="Test.php">./web/themes/custom/drumeilook/tests/src/Functional</directory>
-    </testsuite>
-    <testsuite name="drumeilook-unit">
-      <directory suffix="Test.php">./web/themes/custom/drumeilook/tests/src/Unit</directory>
+    <testsuite name="unit">
+      <directory suffix="Test.php">web/modules/contrib/icon_bundle_api/tests/src/Unit</directory>
+      <!--<directory suffix="Test.php">web/modules/contrib/icon_bundle_fontawesome/tests/src/Unit</directory>-->
+      <!--<directory suffix="Test.php">web/modules/contrib/icon_field/tests/src/Unit</directory>-->
     </testsuite>
   </testsuites>
 
@@ -82,11 +71,11 @@
   <!-- Filter for coverage reports. -->
   <coverage>
     <include>
-        <directory>./web/themes/custom/*/src</directory>
-        <directory>./web/themes/custom/*/tests</directory>
+        <directory>web/modules/contrib/*/src</directory>
+        <directory>web/modules/contrib/*/tests</directory>
     </include>
     <exclude>
-      <directory suffix="Test.php">./web/themes/custom/*/tests</directory>
+      <directory suffix="Test.php">web/modules/contrib/*/tests</directory>
     </exclude>
     <report>
       <clover outputFile="build/logs/clover.xml"/>
