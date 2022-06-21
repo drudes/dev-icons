@@ -1,45 +1,73 @@
-# Website Absolwenci
+# drudes/dev-icons
 
-## Notes for (whom?)
+Development environment for drupal modules:
 
-### Runtime Requirements
+- ``drupal/icon_bundle_api``,
+- ``drupal/icon_bundle_fontawesome``,
+- ``drupal/icon_field``.
 
-PHP>=8.0 is required and some extensions as required by drupal.
+## Requirements
 
-## Notes for developers
-
-### Development requirements
-
+- PHP>=7.3 as required by drupal.
 - [docker](https://docker.com)
 - [ddev-local](https://ddev.readthedocs.io/)
 
-### Initial preparations
+## Initial preparations
 
-After you've just cloned
+### Required directory
 
-```shell
-bin/phive install
-bin/composer up
-```
-
-### Running the website ddev
+Before we start cloning, ensure that ``repos`` directory exists
 
 ```shell
-ddev start
+[ -e repos ] || mkdir repos
 ```
 
-### Executing drush commands
+### Cloning
 
 ```shell
-ddev drush ...
+(cd repos && git clone git@github.com:drudes/icon_bundle_api.git)
+(cd repos && git clone git@github.com:drudes/icon_bundle_fontawesome.git)
+(cd repos && git clone git@github.com:drudes/icon_field.git)
+git clone git@github.com:drudes/dev-icons.git
+cd dev-icons
 ```
 
-The website shall appear under ``https://meil.ddev.site``.
-You may customize ddev settings in .ddev/config.local.yaml.
+You may need to customize ddev settings in .ddev/config.local.yaml, for example
+
+```shell
+echo 'router_http_port: "1080"' >> .ddev/config.local.yaml
+```
+
 See [config.yaml documentation](https://ddev.readthedocs.io/en/stable/users/extend/config_yaml/)
 
-### Stopping the website
+## Development workflow
+
+### Initializing project
+
+First, Drupal project and our modules need to be installed locally:
 
 ```shell
-ddev stop
+scripts/install-project
+```
+
+This will install Drupal website under ``web/`` directory (note that the
+``web/`` directory is ``.gitignore``'d). The website shall be available at
+``https://dev-icons.ddev.site``.
+
+The modules being developed get installed automatically under
+``web/modules/contrib``. Source code shall be modified there.
+
+
+Once, a piece of the work is done, the changes then can be pushed back to
+``../repos/*`` with the script:
+
+```shell
+scripts/rsync-to-repositories
+```
+
+Then, you may examine each individual repository under ``../repos/*`` and see
+what needs to be committed to git, for example:
+
+```
+(cd ../repos/icon_bundle_api && git status)
 ```
