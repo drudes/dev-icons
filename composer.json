@@ -38,12 +38,12 @@
         "drupal/core-dev": "^9.2",
         "drush/drush": "^10.6",
         "fenetikm/autoload-drupal": "dev-master",
+        "mglaman/phpstan-drupal": "^1.1",
         "php-mock/php-mock": "^2.3",
         "phpspec/prophecy-phpunit": "^2",
+        "phpstan/phpstan": "^1.7",
         "phptailors/phpunit-inheritance": "dev-master",
-        "phpunit/phpunit": "^9.4",
-        "psalm/plugin-phpunit": "^0.16",
-        "vimeo/psalm": "^4.22"
+        "phpunit/phpunit": "^9.4"
     },
     "conflict": {
         "drupal/drupal": "*"
