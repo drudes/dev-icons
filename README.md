@@ -75,12 +75,19 @@ what needs to be committed to git, for example:
 
 ### Running tests
 
-```
+```shell
 ddev phpunit
 ```
 
-### Running psalm for static analysis
+You can also run particular testsuites
+
+```shell
+ddev phpunit --testsuite functional
+ddev phpunit --testsuite unit
+```
+
+### Running static analysis
 
 ```
-ddev exec vendor/bin/psalm
+ddev exec vendor/bin/phpstan analyze
 ```
