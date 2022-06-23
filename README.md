@@ -89,5 +89,5 @@ ddev phpunit --testsuite unit
 ### Running static analysis
 
 ```
-ddev exec vendor/bin/phpstan analyze
+ddev phpstan analyze
 ```

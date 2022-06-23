@@ -1,5 +1,7 @@
 parameters:
   level: 6
+  bootstrapFiles:
+    - web/core/tests/bootstrap.php
   paths:
     - web/modules/contrib/icon_bundle_api/src
     - web/modules/contrib/icon_bundle_api/tests/src
