@@ -41,6 +41,7 @@
         "mglaman/phpstan-drupal": "^1.1",
         "php-mock/php-mock": "^2.3",
         "phpspec/prophecy-phpunit": "^2",
+        "phpstan/extension-installer": "^1.1",
         "phpstan/phpstan": "^1.7",
         "phptailors/phpunit-inheritance": "dev-master",
         "phpunit/phpunit": "^9.4"
@@ -59,7 +60,8 @@
             "drupal/console-extend-plugin": true,
             "dealerdirect/phpcodesniffer-composer-installer": true,
             "fenetikm/autoload-drupal": true,
-            "oomphinc/composer-installers-extender": true
+            "oomphinc/composer-installers-extender": true,
+            "phpstan/extension-installer": true
         }
     },
     "scripts": {
