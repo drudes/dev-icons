@@ -45,6 +45,7 @@
         "phpstan/phpstan": "^1.7",
         "phpstan/phpstan-deprecation-rules": "^1.0",
         "phpstan/phpstan-strict-rules": "^1.3",
+        "phptailors/phpunit-arrays": "dev-master",
         "phptailors/phpunit-inheritance": "dev-master",
         "phpunit/phpunit": "^9.4"
     },
